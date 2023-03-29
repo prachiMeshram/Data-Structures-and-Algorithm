@@ -13,7 +13,7 @@ int perfectPeak(vector<int> &A) {
     
     int maxi = A[0];
     
-    for(int i = 1; i < A.size(); i++) {
+    for(int i = 1; i < A.size() - 1; i++) {
         if (A[i] > maxi) {
             maxi = A[i];
             if (temp[i+1] > A[i]) {
