@@ -73,7 +73,7 @@ return multiplied_matrix;
 
 
 
-int Solution::solve(int n) {
+int solve(int n) {
 vector<vector<int>> A ={{1, 1} , {1 , 0}};
 vector<vector<int>> fib=matrix_exponentiation( A , n);
 return fib[1][0];
