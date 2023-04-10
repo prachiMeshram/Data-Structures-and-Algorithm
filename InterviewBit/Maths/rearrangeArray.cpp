@@ -26,4 +26,3 @@ void arrange(vector<int> &A) {
     // }
     // return;
 }
-z
