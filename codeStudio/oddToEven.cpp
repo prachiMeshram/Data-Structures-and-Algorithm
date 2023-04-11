@@ -1,6 +1,8 @@
 // https://www.codingninjas.com/codestudio/problem-details/odd-to-even_1214553
 
 #include <bits/stdc++.h> 
+using namespace std;
+
 string oddToEven(string &num) 
 {
 	// Write your code here
