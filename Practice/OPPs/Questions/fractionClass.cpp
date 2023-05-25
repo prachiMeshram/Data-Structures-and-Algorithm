@@ -1,5 +1,8 @@
 // https://www.codingninjas.com/codestudio/guided-paths/basics-of-c/content/118817/offering/1381816?leftPanelTab=0
 
+// TWO TESTS CASES ARE NOT PASSING
+
+
 #include <bits/stdc++.h> 
 #include<iostream>
 
