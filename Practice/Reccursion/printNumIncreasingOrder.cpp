@@ -19,4 +19,4 @@ int main () {
 
     printNumsIncreOrder (num);
     return 0;
-}
+};
