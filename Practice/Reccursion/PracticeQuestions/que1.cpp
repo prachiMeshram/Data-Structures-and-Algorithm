@@ -4,17 +4,17 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int allOccurences(int n) {
+// int allOccurences(int n) {
 
-    // base case
+//     // base case
     
-}
+// }
 
 int main () {
     int n;
     cin >> n;
-    int arr[] = {1, 2, 4, 5, }
-    cout <<  waysToReach(n) << " ";
+    int arr[] = {1, 2, 4, 5, };
+    // cout <<  waysToReach(n) << " ";
 
     return 0;
 }
