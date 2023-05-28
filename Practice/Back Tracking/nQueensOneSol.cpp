@@ -2,7 +2,7 @@
 using namespace std;
 
 void printBoard(vector<vector<char>> &board) {
-    cout << "--- chess borad ---";
+    cout << "--- chess board ---"<< endl;
     for (int i = 0; i < board.size(); i++) {
         for (int j = 0; j < board.size(); j++) {
             cout << board[i][j] << " ";
@@ -37,46 +37,38 @@ bool isSafe(vector<vector<char>> &board, int row, int col) {
 }
 
 
-// void nQueens(vector<vector<char>> board, int row) {
-//     // base case 
-//     if (row == board.size()) {
-//         printBoard(board);
-//         return;
-//     }
-
-//     for (int col = 0; col < board.size(); col++) {
-//         if (isSafe(board, row, col)) {
-//             board[row][col] = 'Q';
-//             nQueens(board, row+1); // recursion call
-//             board[row][col] = 'X'; // backtracking 
-//         }
-//     }
-// } 
-
-void nQueens(vector<vector<char>> &board, int row, int &count) {
+bool nQueens(vector<vector<char>> &board, int row) {
     // base case 
     if (row == board.size()) {
-        count++;
-        return;
+        return true;
     }
 
     for (int col = 0; col < board.size(); col++) {
         if (isSafe(board, row, col)) {
             board[row][col] = 'Q';
-            nQueens(board, row+1, count); // recursion call
+            if (nQueens(board, row+1) ) {
+                return true;
+            }
             board[row][col] = 'X'; // backtracking 
         }
     }
+    return false;
 } 
+
 
 int main () {
     int n;
     cin >> n;
 
     vector<vector<char>> board(n, vector<char>(n, 'X'));
-    int count = 0;
-    nQueens(board, 0, count); 
-    cout << count << " "; 
+
+    if (nQueens(board, 0)) {
+        cout << "solution is possible" << endl; 
+        printBoard(board);
+    }
+    else {
+        cout << "solution is not possible" << " ";
+    }
 
     return 0;
-}
+}    
