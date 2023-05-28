@@ -37,17 +37,33 @@ bool isSafe(vector<vector<char>> board, int row, int col) {
 }
 
 
-void nQueens(vector<vector<char>> board, int row) {
+// void nQueens(vector<vector<char>> board, int row) {
+//     // base case 
+//     if (row == board.size()) {
+//         printBoard(board);
+//         return;
+//     }
+
+//     for (int col = 0; col < board.size(); col++) {
+//         if (isSafe(board, row, col)) {
+//             board[row][col] = 'Q';
+//             nQueens(board, row+1); // recursion call
+//             board[row][col] = 'X'; // backtracking 
+//         }
+//     }
+// } 
+
+void nQueens(vector<vector<char>> board, int row, int &count) {
     // base case 
     if (row == board.size()) {
-        printBoard(board);
+        count++;
         return;
     }
 
     for (int col = 0; col < board.size(); col++) {
         if (isSafe(board, row, col)) {
             board[row][col] = 'Q';
-            nQueens(board, row+1); // recursion call
+            nQueens(board, row+1, count); // recursion call
             board[row][col] = 'X'; // backtracking 
         }
     }
@@ -58,8 +74,9 @@ int main () {
     cin >> n;
 
     vector<vector<char>> board(n, vector<char>(n, 'X'));
-
-    nQueens(board, 0); 
+    int count = 0;
+    nQueens(board, 0, count); 
+    cout << count << " "; 
 
     return 0;
 }
