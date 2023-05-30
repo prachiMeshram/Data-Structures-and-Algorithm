@@ -109,18 +109,44 @@ void print(Node* &head) {
     cout << endl;
 }
 
-void reverseLLrecursion (Node* &head, Node* curr, Node* prev) {
+// void reverseLLrecursion (Node* &head, Node* curr, Node* prev) {
+//     // base case 
+//     if (curr == NULL) {
+//         head = prev;
+//         return;
+//     }
+
+//     Node* forward = curr -> next;
+//     curr -> next = prev;
+//     prev = curr;
+//     curr = forward;
+//     reverseLLrecursion (head, curr, prev);
+// }
+
+// void reverseLLrecursion (Node* &head, Node* curr, Node* prev) {
+//     // base case 
+//     if (curr == NULL) {
+//         head = prev;
+//         return;
+//     }
+
+//     Node* forward = curr -> next;
+//     reverseLLrecursion (head, forward, curr);
+//     curr -> next = prev;
+// }
+
+Node* reverseLLrecursion (Node* &head) {
     // base case 
-    if (curr == NULL) {
-        head = prev;
-        return;
+    if (head == NULL || head -> next == NULL) {
+        return head;
     }
 
-    Node* forward = curr -> next;
-    curr -> next = prev;
-    prev = curr;
-    curr = forward;
-    reverseLLrecursion (head, curr, prev);
+    Node* reversedHead = reverseLLrecursion(head -> next);
+
+    head->next->next = head;
+    head -> next = NULL;
+    
+    return reversedHead;
 }
 
 void reverseLL(Node* &head) {
@@ -160,8 +186,9 @@ int main () {
 
     cout << "reversed LL is : " << endl;
     // reverseLL(head)
-    reverseLLrecursion(head, head, NULL);
-    print(head);
+    // reverseLLrecursion(head, head, NULL);
+    Node* newhead = reverseLLrecursion(head);
+    print(newhead);
 
 
     return 0;
