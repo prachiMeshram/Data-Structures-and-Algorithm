@@ -64,40 +64,6 @@ void InsertAtPosition (Node* &head, Node* &tail, int p, int d) {
     
 }
 
-void DeleteNode (Node* &head, Node* &tail, int p) {
-
-    // deleting start node
-    if ( p == 1) {
-        Node* temp = head;
-        head = head -> next;
-        temp -> next = NULL;
-        delete temp; // free the memory of start node
-        return;
-    }
-
-    Node* curr = head;
-    Node* prev = NULL;
-    int count = 1;
-
-    while (count < p) {
-        prev = curr;
-        curr = curr -> next;
-        count++;
-    }
-
-    // deleting last node
-    if (curr -> next == NULL) {
-        prev -> next = curr -> next;
-        tail = prev;
-        delete(curr);
-        return;
-    }
-    
-    prev -> next = curr -> next;
-    curr -> next = NULL;
-    delete(curr);
-}
-
 void print(Node* &head) {
 
     Node* temp = head;
@@ -130,6 +96,57 @@ bool detectLoop (Node* &head) {
     return false;
 }
 
+Node* floydDetect (Node* head) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    Node* fast = head;
+    Node* slow = head;
+
+    while (fast != NULL) {
+        fast = fast -> next;
+        if (fast != NULL) {
+            fast = fast->next;
+        }
+        slow = slow->next;
+
+        if (slow == fast) {
+            return slow;
+        }
+    }
+
+    return NULL;
+
+}
+
+Node* getStartNode (Node* head) {
+    Node* intersection = floydDetect(head);
+    Node* slow = head;
+    Node* fast = intersection;
+
+    while (slow != fast) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    return slow;
+}
+
+void removeLoop(Node* head) {
+
+    Node* startNode = getStartNode(head);
+    Node* temp = startNode;
+
+    while (temp->next != startNode) {
+        temp = temp->next;
+    }
+
+    temp->next = NULL;
+    cout << "loop removed" << endl;
+}
+
+
 int main () {
 
     Node* node1 = new Node(10);
@@ -159,11 +176,20 @@ int main () {
     cout << "tail : " << tail -> next -> data << endl;
     // print(head); // code error
 
-    if (detectLoop(head)) {
-        cout << "cycle is present" << endl;
+    if (floydDetect(head) == NULL) {
+        cout << "cycle is not present " << endl;
     }
     else {
-        cout << "cycle is not present" << endl;
+        cout << "cycle is present and starts at " << getStartNode(head) -> data << endl;
+    }
+
+    removeLoop(head);
+
+    if (floydDetect(head) == NULL) {
+        cout << "cycle is not present " << endl;
+    }
+    else {
+        cout << "cycle is present and starts at " << getStartNode(head) -> data << endl;
     }
 
     // DeleteNode(head, tail, 3);
