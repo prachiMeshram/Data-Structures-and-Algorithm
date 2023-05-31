@@ -1,8 +1,10 @@
 // https://www.codingninjas.com/codestudio/problems/unique-sorted-list_2420283?leftPanelTab=0&campaign=YouTube_Lovebabbar29thJan&utm_source=youtube&utm_medium=affiliate&utm_campaign=YouTube_Lovebabbar29thJan
 
-/************************************************************
+#include<bits/stdc++.h>
+using namespace std;
 
-    Following is the linked list node structure.
+
+    // Following is the linked list node structure.
     
     class Node 
     {
@@ -17,7 +19,6 @@
         }
     };
     
-************************************************************/
 
 Node * uniqueSortedList(Node * head) {
     // Write your code here.
