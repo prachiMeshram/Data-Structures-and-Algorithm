@@ -23,26 +23,4 @@ void deleteMiddle(stack<int>&inputStack, int N){
 	
    // Write your code here
    solve(inputStack, N, 0);
-}#include <bits/stdc++.h> 
-
-void solve(stack<int>&inputStack, int size, int count) {
-   // base case 
-   if (count == size/2) {
-      inputStack.pop();
-      return;
-   }
-
-   int num = inputStack.top();
-   inputStack.pop();
-
-   solve(inputStack, size, count+1);
-
-   inputStack.push(num);
-
-}
-
-void deleteMiddle(stack<int>&inputStack, int N){
-	
-   // Write your code here
-   solve(inputStack, N, 0);
 }
