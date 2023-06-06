@@ -1,6 +1,8 @@
 // https://www.codingninjas.com/codestudio/problems/two-stacks_983634?leftPanelTab=0&campaign=YouTube_CodestudioLovebabbar5thfeb&utm_source=youtube&utm_medium=affiliate&utm_campaign=YouTube_CodestudioLovebabbar5thfeb
 
 #include <bits/stdc++.h> 
+using namespace std;
+
 class TwoStack {
     int size;
     int* arr;
