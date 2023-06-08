@@ -7,41 +7,90 @@ int main () {
     vector<int> verCost{2, 1, 3, 1, 4};
     vector<int> horCost{4, 1, 2};
 
-    sort(verCost.begin(), verCost.end());
-    sort(horCost.begin(), horCost.end());
+    sort(verCost.begin(), verCost.end(), [](int a, int b) {
+        return a>b;
+    });
+    sort(horCost.begin(), horCost.end(), [](int a, int b) {
+        return a>b;
+    });
 
-    int h = horCost.size()-1;
-    int v = verCost.size()-1;
+    int h = 0;
+    int v = 0;
     int vp = 1;
     int hp = 1;
     int totalCost = 0;
 
-    while (h>=0 && v>=0) {
+    while (h < horCost.size() && v < verCost.size()) {
         if (verCost[v] > horCost[h]) {
             totalCost += hp*verCost[v];
             vp++;
-            v--;
+            v++;
         }
         else {
             totalCost += vp*horCost[h];
             hp++;
-            h--;
+            h++;
         }
     }
 
-    while (v>=0) {
+    while (v < verCost.size()) {
         totalCost += hp*verCost[v];
         vp++;
-        v--;
+        v++;
     }
     
-    while (h>=0) {
+    while (h < horCost.size()) {
         totalCost += vp*horCost[h];
             hp++;
-            h--;
+            h++;
     }
 
     cout << totalCost << " ";
 
     return 0;
 }
+
+// int main () {
+
+//     int n = 4, m = 6;
+//     vector<int> verCost{2, 1, 3, 1, 4};
+//     vector<int> horCost{4, 1, 2};
+
+//     // sort(verCost.begin(), verCost.end());
+//     // sort(horCost.begin(), horCost.end());
+
+//     int h = horCost.size()-1;
+//     int v = verCost.size()-1;
+//     int vp = 1;
+//     int hp = 1;
+//     int totalCost = 0;
+
+//     while (h>=0 && v>=0) {
+//         if (verCost[v] > horCost[h]) {
+//             totalCost += hp*verCost[v];
+//             vp++;
+//             v--;
+//         }
+//         else {
+//             totalCost += vp*horCost[h];
+//             hp++;
+//             h--;
+//         }
+//     }
+
+//     while (v>=0) {
+//         totalCost += hp*verCost[v];
+//         vp++;
+//         v--;
+//     }
+    
+//     while (h>=0) {
+//         totalCost += vp*horCost[h];
+//             hp++;
+//             h--;
+//     }
+
+//     cout << totalCost << " ";
+
+//     return 0;
+// }
