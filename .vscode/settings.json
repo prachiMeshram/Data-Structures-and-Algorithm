@@ -11,6 +11,14 @@
         "regex": "cpp",
         "utility": "cpp",
         "valarray": "cpp",
-        "new": "cpp"
-    }
+        "new": "cpp",
+        "*.tcc": "cpp",
+        "list": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp"
+    },
+    "cph.general.onceMaintainerMessage": false
 }

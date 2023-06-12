@@ -39,9 +39,10 @@ void solve (TreeNode* root, vector<int> &ans) {
     while (!s.empty()) {
         TreeNode* curr = s.top();
         s.pop();
-        
+
         ans.push_back(curr->val);
 
+        // Push the right child first so that it gets processed after the left child
         if (curr->right) {
             s.push(curr->right);
         }
