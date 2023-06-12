@@ -28,7 +28,7 @@ int mazeObstacles(int n, int m, vector< vector< int> > &mat) {
     return solve(n-1, m-1, mat);
 }
 
-// NORMAL RECURSIVELY with DP
+// RECURSIVELY with DP
 int mod = (int) (1e9 + 7);
 int solve(int i, int j, vector< vector< int> > &mat, vector<vector<int>> &dp) {
     if (i == 0 && j == 0) {
