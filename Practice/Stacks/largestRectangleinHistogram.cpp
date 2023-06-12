@@ -14,6 +14,8 @@ private:
         for(int i = n-1; i>=0; i--) {
             int curr = heights[i];
 
+            // [2, 5, 3, 4, 1]
+            
             while (st.top()!=-1 && heights[st.top()] >= curr) 
             {
                 st.pop();
