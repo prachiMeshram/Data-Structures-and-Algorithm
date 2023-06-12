@@ -3,6 +3,7 @@
 #include<iostream>
 using namespace std;
 #include <vector>
+#include <stack>
 
 
 //  Definition for a binary tree node.
@@ -19,16 +20,40 @@ using namespace std;
 
 class Solution {
 private:
+// RECURSIVELY
+// void solve(TreeNode* root, vector<int> &ans) {
+//     if (root == NULL) {
+//         return;
+//     }
+
+//     solve(root->left, ans);
+//     ans.push_back(root->val);
+//     solve(root->right, ans);
+
+// }
+
+// ITERATIVELY
 void solve(TreeNode* root, vector<int> &ans) {
-    if (root == NULL) {
-        return;
+    stack<TreeNode*> s;
+    TreeNode* curr = root;
+
+    while (curr || !s.empty()) {
+
+        // travel to left nodes of curr
+        while (curr) {
+            s.push(curr);
+            curr = curr->left; 
+        }
+
+        curr = s.top();
+        s.pop();
+        ans.push_back(curr->val);
+
+        //
+        curr = curr->right;
     }
-
-    solve(root->left, ans);
-    ans.push_back(root->val);
-    solve(root->right, ans);
-
 }
+
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
