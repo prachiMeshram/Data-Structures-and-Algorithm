@@ -15,7 +15,7 @@ class Node {
     }
 };
 
-Node* BinaryTree(Node* root) {
+Node* BinaryTreePreOrder(Node* root) {
     cout << "Enter the data" << endl;
     int data;
     cin >> data;
@@ -26,9 +26,9 @@ Node* BinaryTree(Node* root) {
     }
 
     cout << "Enter data for  2inserting in left of " << data << endl;
-    root -> left = BinaryTree (root->left);
+    root -> left = BinaryTreePreOrder(root->left);
     cout << "Enter data for inserting in right of " << data << endl;
-    root -> right = BinaryTree (root-> right);
+    root -> right = BinaryTreePreOrder(root-> right);
 
     return root;
 }
@@ -37,7 +37,7 @@ int main () {
     Node* root = NULL;
 
     // creating a tree;
-    root = BinaryTree(root);
+    root = BinaryTreePreOrder(root);
 
     return 0;
 }
