@@ -90,3 +90,41 @@ int minSumPath(vector<vector<int>> &grid) {
 
   return dp[n-1][m-1];
 }
+
+// SPACE OPTIMISATION
+int minSumPath(vector<vector<int>> &grid) {
+  // Write your code here.
+
+  int n = grid.size();
+  int m = grid[0].size();
+  vector<int> prev(m,-1);
+
+  for (int i = 0; i < n; i++) {
+      vector<int> curr(m,-1);
+    for (int j = 0; j < m; j++) {
+      if (i == 0 && j == 0) {
+        curr[j] = grid[i][j];
+      } 
+      else {
+          int up = 0; 
+          int left = 0; 
+          if (i > 0) {
+            up = grid[i][j] + prev[j];
+          }
+          else {
+              up = INT_MAX;
+          }
+          if (j > 0) {
+            left = grid[i][j] + curr[j - 1];
+          }
+          else {
+              left = INT_MAX;
+          }
+          curr[j] = min(up, left);
+      }
+    }
+    prev = curr;
+  }
+
+  return prev[m-1];
+}
