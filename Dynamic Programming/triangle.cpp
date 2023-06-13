@@ -41,3 +41,49 @@ int minimumPathSum(vector<vector<int>>& triangle, int n){
 	
 	return dp[0][0];
 }
+
+// TABULATION
+int minimumPathSum(vector<vector<int>>& triangle, int n){
+	// Write your code here.
+	vector<vector<int>> dp(n, vector<int> (n, -1));
+
+	for (int i = n-1; i >= 0; i--) {
+
+		for (int j = 0; j < n; j++) {
+			if (i == n-1) {
+				dp[i][j] = triangle[i][j];
+			}
+			else {
+				int dw = triangle[i][j] + dp[i+1][j];  
+				int dg = triangle[i][j] + dp[i+1][j+1];  
+				dp[i][j] = min(dw, dg);
+			}
+		}
+	}
+	
+	return dp[0][0];
+}
+
+
+// SPACE OPTIMIZATION
+int minimumPathSum(vector<vector<int>>& triangle, int n){
+	// Write your code here.
+	vector<int> prev(n, -1);
+
+	for (int i = n-1; i >= 0; i--) {
+		vector<int> curr(n, -1);
+		for (int j = 0; j < n; j++) {
+			if (i == n-1) {
+				curr[j] = triangle[i][j];
+			}
+			else {
+				int dw = triangle[i][j] + prev[j];  
+				int dg = triangle[i][j] + prev[j+1];  
+				curr[j]= min(dw, dg);
+			}
+		}
+		prev = curr;
+	}
+	
+	return prev[0];
+}
