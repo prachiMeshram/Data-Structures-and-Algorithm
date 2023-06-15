@@ -97,3 +97,43 @@ int getMaxPathSum(vector<vector<int>> &matrix) {
 
   return maxi;
 }
+
+// SPACE OPTIMIZATION 
+int getMaxPathSum(vector<vector<int>> &matrix) {
+  //  Write your code here.
+  int n = matrix.size();
+  int m = matrix[0].size();
+  vector<int> prev(m, 0);
+
+  for (int j = 0; j < m; j++) {
+    prev[j] = matrix[0][j];
+  }
+
+  for (int i = 1; i < n; i++) {
+    vector<int> curr(m, 0);
+    for (int j = 0; j < m; j++) {
+      int ld = INT_MIN;
+      int rd = INT_MIN;
+
+      int up = matrix[i][j] + prev[j];
+      if (j - 1 >= 0) {
+        ld = matrix[i][j] + prev[j - 1];
+      } 
+      if (j + 1 < m) {
+        rd = matrix[i][j] + prev[j + 1];
+      } 
+
+      curr[j] = max(up, max(ld, rd));
+    }
+
+    prev = curr;
+  }
+
+  int maxi = INT_MIN;
+
+  for (int j = 0; j < m; j++) {
+    maxi = max(maxi, prev[j]);
+  }
+
+  return maxi;
+}
