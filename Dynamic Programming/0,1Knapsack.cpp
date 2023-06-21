@@ -90,3 +90,30 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 
 	return prev[maxWeight];
 }
+
+// space opt with only one vector
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+	vector<int> prev(maxWeight+1, 0);
+
+	for (int w = weight[0]; w <= maxWeight; w++) {
+		prev[w] = value[0];
+	}
+
+	for (int ind = 1; ind < n; ind++) {
+		for (int cap = maxWeight; cap >= 0; cap--) {
+
+			int notTake = 0 + prev[cap];
+
+			int take = INT_MIN;
+			if (weight[ind] <= cap) {
+				take = value[ind] + prev[cap-weight[ind]];
+			}
+
+			prev[cap] = max(take, notTake);
+		}
+	}
+
+	return prev[maxWeight];
+}
