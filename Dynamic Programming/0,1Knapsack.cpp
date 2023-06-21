@@ -60,3 +60,33 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 
 	return dp[n-1][maxWeight];
 }
+
+// space optimisation with two vectors
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+	vector<int> prev(maxWeight+1, 0);
+	vector<int> curr(maxWeight+1, 0);
+
+	for (int w = weight[0]; w <= maxWeight; w++) {
+		prev[w] = value[0];
+	}
+
+	for (int ind = 1; ind < n; ind++) {
+		for (int w = 0; w <= maxWeight; w++) {
+
+			int notTake = 0 + prev[w];
+
+			int take = INT_MIN;
+			if (weight[ind] <= w) {
+				take = value[ind] + prev[w-weight[ind]];
+			}
+
+			curr[w] = max(take, notTake);
+		}
+		prev = curr;
+	}
+
+	return prev[maxWeight];
+}
