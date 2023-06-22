@@ -115,3 +115,45 @@ int minimumElements(vector<int> &num, int x)
     }
     return ans;
 }
+
+// SPACE OPTIMISATION
+
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+    int n = num.size();
+    int T = x;
+    vector<int> prev(T+1, 0), curr(T+1, 0);
+
+    for (int tar = 0; tar <= T; tar++) {
+        if (tar%num[0] == 0) {
+            prev[tar] = tar/num[0];
+        }
+        else {
+            prev[tar] = 1e9;
+        }
+    }
+
+    for (int ind = 1; ind < n; ind++) {
+        for (int tar = 0; tar <= T; tar++) {
+
+            int notTake = 0 + prev[tar];
+
+            int take = 1e9;
+            if (tar>=num[ind]) {
+                take = 1 + curr[tar-num[ind]];
+            }
+    
+            curr[tar] = min(take, notTake);
+        }
+        prev = curr;
+    }
+
+
+    int ans =  prev[T];
+
+    if (ans >= 1e9) {
+        return -1;
+    }
+    return ans;
+}
