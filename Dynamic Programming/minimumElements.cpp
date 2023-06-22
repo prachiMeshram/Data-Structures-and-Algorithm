@@ -3,7 +3,6 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
-
 // recursion
 int fun (int ind, int T, vector<int> &num) {
     // base case 
