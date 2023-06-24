@@ -4,7 +4,6 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
-
 template <typename T>
 class TreeNode
 {
@@ -35,6 +34,7 @@ bool getPath(TreeNode<int> *root, vector<TreeNode<int> *> &path, int P)
     {
         return false;
     }
+    
     path.push_back(root);
 
     if (root->data == P)
