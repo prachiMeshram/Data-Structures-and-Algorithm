@@ -26,3 +26,34 @@ int cutRod(vector<int> &price, int n)
 	
 	return fun(price.size() -1, n, price);
 }
+
+
+
+// USING DP
+int fun(int ind, int N, vector<int> &price, vector<vector<int>> &dp) {
+	if (ind == 0) {
+		return price[0]*N;
+	}
+
+	if (dp[ind][N] != -1) {
+		return dp[ind][N];
+	}
+
+	int notTake = 0 + fun (ind-1, N, price, dp);
+
+	int take = INT_MIN;
+	int rodLen = ind+1;
+	if (rodLen <= N) {
+		take = price[ind] + fun(ind, N - rodLen, price, dp);
+	}
+
+	dp[ind][N] = max(take, notTake);
+}
+
+int cutRod(vector<int> &price, int n)
+{
+	// Write your code here.
+	vector<vector<int>> dp(price.size(), vector<int>(n+1, -1));
+	
+	return fun(price.size() -1, n, price, dp);
+}
