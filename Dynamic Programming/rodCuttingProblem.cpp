@@ -89,3 +89,33 @@ int cutRod(vector<int> &price, int n)
 	return dp[n-1][n];
 }
 
+
+// SPACE OPTIMISATION WITH 1D ARRAY
+
+int cutRod(vector<int> &price, int n)
+{
+	// Write your code here.
+	vector<int> prev(n+1, 0);
+
+	for (int i = 0; i <= n; i++) {
+		prev[i] = price[0]*i;
+	}
+	
+	for (int ind = 1; ind < n; ind++) {
+		for (int len = 0; len <= n; len++) {
+
+			int notTake = 0 + prev[len];
+
+			int take = INT_MIN;
+			int rodLen = ind+1;
+			if (rodLen <= len) {
+				take = price[ind] + prev[len-rodLen];
+			}
+
+			prev[len] = max(take, notTake);
+		}
+	}
+
+	return prev[n];
+}
+
