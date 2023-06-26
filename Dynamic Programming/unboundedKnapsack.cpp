@@ -84,4 +84,63 @@ int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight)
     return dp[n-1][w];
 }
 
+// #include <bits/stdc++.h> 
+
+// SPACE OPTIMISATION
+int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight)
+{
+    // Write Your Code Here.
+    vector<int> prev(w+1, 0), curr(w+1, 0);
+    
+
+    for (int wt = weight[0]; wt <= w; wt++) {
+        prev[wt] = ((int) wt / weight[0]) * profit[0];
+    }
+
+    for (int ind = 1; ind < n; ind++) {
+        for (int wt = 0; wt <= w; wt++) {
+
+            int notTake = 0 + prev[wt];
+            int take = INT_MIN;
+            if (weight[ind] <= wt) {
+                take = profit[ind] + curr[wt - weight[ind]];
+            }
+
+            curr[wt] = max(take, notTake);
+        }
+        prev = curr;
+    }
+
+    return prev[w];
+}
+
+
+// SPACE OPTIMISATION with only one vector
+int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight)
+{
+    // Write Your Code Here.
+    vector<int> prev(w+1, 0);
+    
+
+    for (int wt = weight[0]; wt <= w; wt++) {
+        prev[wt] = ((int) wt / weight[0]) * profit[0];
+    }
+
+    for (int ind = 1; ind < n; ind++) {
+        for (int wt = 0; wt <= w; wt++) {
+
+            int notTake = 0 + prev[wt];
+            int take = INT_MIN;
+            if (weight[ind] <= wt) {
+                take = profit[ind] + prev[wt - weight[ind]];
+            }
+
+            prev[wt] = max(take, notTake);
+        }
+    }
+
+    return prev[w];
+}
+
+
 
