@@ -80,3 +80,26 @@ TreeNode<int> *LCAinaBST(TreeNode<int> *root, TreeNode<int> *P, TreeNode<int> *Q
 
     return pathP[i - 1];
 }
+
+// APPROACH TWO
+
+TreeNode<int>* LCAinaBST(TreeNode<int>* root, TreeNode<int>* P, TreeNode<int>* Q)
+{
+	// Write your code here
+    if (root == NULL || root->data == P->data || root->data == Q->data) {
+        return root;
+    }
+
+    TreeNode<int>* leftLca = LCAinaBST(root->left, P, Q); 
+    TreeNode<int>* rightLca = LCAinaBST(root->right, P, Q); 
+    
+    if (leftLca == NULL) {
+        return rightLca;
+    }
+
+    if (rightLca == NULL) {
+        return leftLca;
+    }
+
+    return root;
+}
