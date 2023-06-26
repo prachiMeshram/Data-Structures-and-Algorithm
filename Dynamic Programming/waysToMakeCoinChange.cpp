@@ -50,3 +50,30 @@ long countWaysToMakeChange(int *denominations, int n, int value)
 
     return dp[n-1][value];
 }
+
+// SPACE OPTIMISATION
+long countWaysToMakeChange(int *denominations, int n, int value)
+{
+    //Write your code here
+    vector<long> prev(value+1, 0), curr(value+1, 0);
+
+    for (int tar = 0; tar <= value; tar++) {
+        prev[tar] = (tar%denominations[0] == 0);
+    }
+    
+    for (int ind = 1; ind < n; ind++) {
+        for (int tar = 0; tar <= value; tar++) {
+            long notTake = prev[tar];
+
+            long take = 0;
+            if (denominations[ind] <= tar) {
+                take = curr[tar - denominations[ind]];
+            }
+
+            curr[tar] = take + notTake;
+        }
+        prev = curr;
+    }
+
+    return prev[value];
+}
