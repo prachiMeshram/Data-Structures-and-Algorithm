@@ -166,3 +166,61 @@ public:
         return dp[n][m];
     }
 };
+
+// SPACE OPTIMISATION
+
+class Solution
+{
+
+public:
+    bool isMatch(string s, string p)
+    {
+        string s1 = p;
+        string s2 = s;
+
+        int n = s1.size();
+        int m = s2.size();
+
+        vector<bool> prev(m + 1, 0), curr(m + 1, 0);
+
+        prev[0] = true;
+
+        for (int j = 1; j <= m; j++)
+        {
+            prev[j] = false;
+        }
+
+        for (int i = 1; i <= n; i++)
+        {
+            int flag = true;
+            for (int k = 1; k <= i; k++)
+            {
+                if (s1[k - 1] != '*')
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            curr[0] = flag;
+            for (int j = 1; j <= m; j++)
+            {
+
+                if (s1[i - 1] == s2[j - 1] || s1[i - 1] == '?')
+                {
+                    curr[j] = prev[j - 1];
+                }
+                else if (s1[i - 1] == '*')
+                {
+                    curr[j] = prev[j] || curr[j - 1];
+                }
+                else
+                {
+                    curr[j] = false;
+                }
+            }
+            prev = curr;
+        }
+
+        return prev[m];
+    }
+};
