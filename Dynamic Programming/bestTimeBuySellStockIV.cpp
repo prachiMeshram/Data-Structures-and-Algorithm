@@ -74,3 +74,29 @@ public:
         return dp[0][0];
     }
 };
+
+// SPACE OPT
+
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n =  prices.size();
+
+        vector<int> ahead(2*k+1, 0);
+        vector<int> cur(2*k+1, 0);
+
+        for (int ind = n-1; ind >= 0; ind--) {
+            for (int transNo = 2*k-1; transNo >= 0; transNo--) {
+                if (transNo % 2 == 0) { // buy
+                    cur[transNo] = max ( -prices[ind] + ahead[transNo+1], 0 + ahead[transNo] );
+                }
+                else {
+                    cur[transNo] = max ( prices[ind] + ahead[transNo+1], 0 + ahead[transNo] ) ;
+                }
+            }
+            ahead = cur;
+        }
+
+        return ahead[0];
+    }
+};
