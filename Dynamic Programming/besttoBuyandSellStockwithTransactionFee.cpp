@@ -92,22 +92,25 @@ public:
 
 // SPACE OPT
 
-class Solution {
+class Solution
+{
 public:
-    int maxProfit(vector<int>& prices, int fee) {
+    int maxProfit(vector<int> &prices, int fee)
+    {
         int n = prices.size();
 
         vector<int> ahead(2, 0);
         vector<int> cur(2, 0);
 
-        for (int ind = n-1; ind >= 0; ind--) {
-            cur[1] = max( -prices[ind] + ahead[0], 0 + ahead[1]);
-        
-            cur[0] = max( prices[ind] - fee + ahead[1], 0 + ahead[0]);
+        for (int ind = n - 1; ind >= 0; ind--)
+        {
+            cur[1] = max(-prices[ind] + ahead[0], 0 + ahead[1]);
+
+            cur[0] = max(prices[ind] - fee + ahead[1], 0 + ahead[0]);
 
             ahead = cur;
         }
- 
+
         return ahead[1];
     }
 };
