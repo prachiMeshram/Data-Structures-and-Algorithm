@@ -1,6 +1,8 @@
 // https://www.codingninjas.com/studio/problems/divisible-set_3754960?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos&leftPanelTab=0
 
 #include <bits/stdc++.h> 
+using namespace std;
+
 vector<int> divisibleSet(vector<int> &arr){
     // Write your code here.
     int n = arr.size();
