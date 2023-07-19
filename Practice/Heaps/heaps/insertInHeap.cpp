@@ -1,27 +1,79 @@
 #include<bits/stdc++.h>
 
-
 using namespace std;
 
 
-const long long int N = 1e6+2;
-const long long int MOD = 1e9+7;
+class Heap {
+    vector<int> arr;
 
+public:
+    void insert(int data) {
+        arr.push_back(data);
 
-#define F	first
-#define S	second
-#define pb	push_back
-#define POB	pop_back
-#define MP	make_pair
-#define ump	unordered_map
-#define int	long long int
-typedef vector<string> vs;
-typedef vector<int> vi;
-typedef pair<int, int> pi;
+        int x = arr.size() - 1;
+        int par = (x - 1) / 2;
 
+        while (arr[x] < arr[par]) {
+            swap(arr[x], arr[par]);
+            x = par;
+            par = (x - 1) / 2;
+        }
+    }
+    int peek () {
+        return arr.front();
+    }
 
-int32_t main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    void heapify (int i) {
+        int minInd = i;
+        int left = 2*i + 1;
+        int right = 2*i + 2;
+
+        if (left < arr.size() && arr[minInd] > arr[left]) {
+            minInd = left;
+        }
+
+        if (right < arr.size() && arr[minInd] > arr[right]) {
+            minInd = right;
+        }
+
+        if (minInd != i) {
+            swap(arr[minInd], arr[i]);
+            heapify(minInd);
+        }
+    } 
+
+    int remove () {
+        int n = arr.size();
+        int data = arr[0];
+
+        // swap first and last elem
+        swap (arr[0], arr[n-1]);
+
+        // delete last
+        arr.erase(arr.begin() + n-1);
+
+        // heapify root
+        heapify(0);
+
+        return data;
+    }
+
+    bool isEmpty() {
+        return arr.size() == 0;
+    }
+};
+
+int main(){
+    Heap h;
+    h.insert(3);
+    h.insert(4);
+    h.insert(1);
+    h.insert(5);
+
+    while (!h.isEmpty()) {
+        cout << h.peek() << endl;
+        h.remove();
+    }
+    
     return 0;
 }
