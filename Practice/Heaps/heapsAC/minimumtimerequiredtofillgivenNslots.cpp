@@ -3,9 +3,9 @@ using namespace std;
 
 
 int main () {
-    int N = 5; // slots
-    int K = 5;
-    vector<int> arr = {1, 2, 3, 4, 5};
+    int N = 6; // slots
+    int K = 2;
+    vector<int> arr = {2, 6};
 
     int counter = 0;
     
@@ -17,24 +17,29 @@ int main () {
         vis[arr[i]] = 1;
         q.push(arr[i]);
     }
-    
-    while (!q.empty()) {
 
-        for (int i = 0;  i < q.size(); i++) {
+    int size = q.size();
+
+    while (!q.empty()) {
+        
+        int temp = 0;
+        for (int i = 0;  i < size; i++) {
             int curr = q.front();
             q.pop();
 
             if (curr-1 >= 1 && vis[curr-1] == 0) {
                 vis[curr-1] = 1;
                 q.push(curr-1);
+                temp++;
             }
 
             if (curr+1 <= N && vis[curr+1] == 0) {
                 vis[curr+1] = 1;
                 q.push(curr+1);
+                temp++;
             }
         }
-        
+        size = temp;
         counter++;
     }
 
