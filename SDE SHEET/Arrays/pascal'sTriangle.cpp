@@ -28,3 +28,38 @@ public:
         return ans;
     }
 };
+
+// using combinations
+class Solution {
+public:
+    int nCr(int r, int c) {
+        int res = 1;
+
+        for (int i = 0 ; i < c; i++) {
+            res *= (r-i);
+            res /= (i+1);
+        }
+        return res;
+    }
+
+    vector<int> getNthRow(int r) {
+        vector<int> temp;
+        int res = 1;
+        for (int c = 1;  c <= r; c++) {
+            temp.push_back(nCr(r-1, c-1));
+        }
+        return temp;
+    }
+
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> ans;
+        vector<int> row;
+        
+        for (int r = 1; r <= numRows; r++) {
+            vector<int> row = getNthRow(r);
+            ans.push_back(row);
+        }
+
+        return ans;
+    }
+};
