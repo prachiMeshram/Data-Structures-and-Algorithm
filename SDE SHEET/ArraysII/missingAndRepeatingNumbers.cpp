@@ -112,3 +112,53 @@ pair<int,int> missingAndRepeating(vector<int> &arr, int n)
 	}
 }
 
+// calculating bitnum in different way
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// Write your code here 
+	
+	int xr = 0;
+	for (int i = 0; i < n; i++) {
+		xr ^= arr[i];
+		xr ^= i+1;
+	}
+	
+	int bitNum = xr & ~(xr-1);
+
+	int zeroC = 0;
+	int oneC = 0;
+	
+	for (int i = 0; i < n; i++) {
+		// oneClub
+		if (arr[i] & bitNum) {
+			oneC ^= arr[i];
+		}
+		else {
+			zeroC ^= arr[i];
+		}
+	}
+	for (int i = 0; i <= n; i++) {
+		// oneClub
+		if (i & bitNum) {
+			oneC ^= i;
+		}
+		else {
+			zeroC ^= i;
+		}
+	}
+	int cnt = 0;
+	for (auto it: arr) {
+		if (it == oneC) {
+			cnt++;
+		}
+	}
+	if (cnt == 2) {
+		return {zeroC, oneC};
+	}
+	else {
+		return {oneC, zeroC};
+	}
+}
+
