@@ -55,3 +55,60 @@ pair<int,int> missingAndRepeating(vector<int> &arr, int N)
 
 	return {(int)y, (int)x};
 }
+
+// USING XOR Operator
+
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// Write your code here 
+	
+	int xr = 0;
+	for (int i = 0; i < n; i++) {
+		xr ^= arr[i];
+		xr ^= i+1;
+	}
+	int bitNum = 0;
+	while (1) {
+		if(xr & 1<<bitNum) {
+			break;
+		}
+		bitNum++;
+	}
+
+	int zeroC = 0;
+	int oneC = 0;
+	
+	for (int i = 0; i < n; i++) {
+		// oneClub
+		if (arr[i] & (1 << bitNum)) {
+			oneC ^= arr[i];
+		}
+		else {
+			zeroC ^= arr[i];
+		}
+	}
+	for (int i = 0; i <= n; i++) {
+		// oneClub
+		if (i & 1 << bitNum) {
+			oneC ^= i;
+		}
+		else {
+			zeroC ^= i;
+		}
+	}
+	int cnt = 0;
+	for (auto it: arr) {
+		if (it == oneC) {
+			cnt++;
+		}
+	}
+	if (cnt == 2) {
+		return {zeroC, oneC};
+	}
+	else {
+		return {oneC, zeroC};
+	}
+}
+
