@@ -1,4 +1,8 @@
+// both positives and negatives
 // https://www.codingninjas.com/studio/problems/920321?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website
+
+// only positives
+// https://www.codingninjas.com/studio/problems/longest-subarray-with-sum-k_6682399?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_Arrayproblems
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -50,4 +54,27 @@ int LongestSubsetWithZeroSum(vector < int > arr) {
     }
   }
   return maxlen;
+}
+
+// optimal code for only positives
+int longestSubarrayWithSumK(vector<int> arr, long long k) {
+    // Write your code here
+     int n = arr.size();
+    int l = 0, r = 0;
+    long long sum = arr[0];
+    int maxLen = 0;
+
+    while (r < n) {
+        while (l <= r && sum > k) {
+        sum -= arr[l];
+        l++;
+        }
+        if (sum == k) {
+        maxLen = max(maxLen, r-l+1);
+        }
+
+        r++;
+        if (r < n) sum += arr[r];
+    }
+    return maxLen;
 }
