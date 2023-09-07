@@ -23,3 +23,31 @@ int LongestSubsetWithZeroSum(vector < int > arr) {
 
   return len;
 }
+
+// optimal for zeros and negatives 
+#include <bits/stdc++.h>
+
+int LongestSubsetWithZeroSum(vector < int > arr) {
+
+  // Write your code here
+  int n = arr.size();
+  map<int, int> prefixSum;
+  
+  int maxlen = 0;
+  int sum = 0;
+  for (int i = 0; i < n; i++) {
+    sum += arr[i];
+    if (sum == 0) {
+      maxlen = max(maxlen, i+1);
+    }
+    int rem = sum;
+    if (prefixSum.find(rem) != prefixSum.end()) {
+      int len = i - prefixSum[rem];
+      maxlen = max(maxlen, len);
+    }
+    if (prefixSum.find(sum) == prefixSum.end()) {
+      prefixSum[sum] = i;
+    }
+  }
+  return maxlen;
+}
