@@ -53,3 +53,55 @@ vector<int> majorityElement(vector<int> v) {
 	}
 	return ans;
 }
+
+// optimal approach
+vector<int> majorityElement(vector<int> v) {
+	// Write your code here
+	vector<int> ans;
+	int n = v.size();
+	
+	int el1 = -1e9;
+	int el2 = -1e9;
+	int cnt1 = 0;
+	int cnt2 = 0;
+
+	for (int i = 0; i < n; i++) {
+		if (cnt1 == 0 && el2 != v[i]) {
+			cnt1 = 1;
+			el1 = v[i];
+		}
+		else if (cnt2 == 0 && el1 != v[i]) {
+			cnt2 = 1;
+			el2 = v[i];
+		}
+		else if (el1 == v[i]) {
+			cnt1++;
+		}
+		else if (el2 == v[i]) {
+			cnt2++;
+		}
+		else {
+			cnt1--;
+			cnt2--;
+		}
+	}
+	
+	cnt1 = 0;
+	cnt2 = 0;
+	for (int i = 0; i < n; i++) {
+		if (el1 == v[i]) {
+			cnt1++;
+		}
+		if (el2 == v[i]) {
+			cnt2++;
+		}
+	}
+	if (cnt1 >= int(n/3) + 1) {
+		ans.push_back(el1);
+	}
+	if (cnt2 >= int(n/3) + 1) {
+		ans.push_back(el2);
+	}
+
+	return ans;
+}
