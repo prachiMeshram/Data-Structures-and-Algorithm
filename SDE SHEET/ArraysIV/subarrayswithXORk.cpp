@@ -21,3 +21,27 @@ int subarraysWithSumK(vector < int > a, int b) {
     }
     return cnt;
 }
+
+// optimal approach using MAPS
+#include<bits/stdc++.h>
+
+int subarraysWithSumK(vector < int > a, int b) {
+    // Write your code here
+    int n = a.size();
+    map<int, int> mpp;
+    int xr = 0;
+    int cnt = 0;
+    mpp[xr] = 1;
+    
+    for (int i = 0; i < n; i++) {
+        xr ^= a[i];
+        int x = xr^b;
+        
+        if (mpp.find(x) != mpp.end()) {
+            cnt += mpp[x];
+        }
+        mpp[xr]++;
+    }
+    
+    return cnt;
+}
