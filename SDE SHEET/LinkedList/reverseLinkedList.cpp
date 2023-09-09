@@ -64,3 +64,20 @@ LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head)
     
     return nHead;
 }
+
+// RECURSIVE SOLUTION 2
+LinkedListNode<int> *reverse(LinkedListNode<int> *&nHead) {
+    if (nHead == NULL || nHead->next == NULL) {
+        return nHead; 
+    }
+    LinkedListNode<int> *fHead = reverse(nHead->next);
+    nHead -> next -> next = nHead;
+    nHead->next = NULL;
+    return fHead;
+}
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
+{
+    // Write your code here
+    LinkedListNode<int> *nHead = head;
+    return reverse(nHead);
+}
