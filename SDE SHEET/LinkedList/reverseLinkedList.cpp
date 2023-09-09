@@ -20,7 +20,7 @@ using namespace std;
     };
 
 
-
+// ITERATIVE APPROACH
 LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
 {
     // Write your code here
@@ -37,4 +37,30 @@ LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head)
     }
     
     return prev;
+}
+
+// RECURSIVE APPROACH
+void solve(LinkedListNode<int>* &nHead, LinkedListNode<int> *curr, LinkedListNode<int> *prev) {
+    if (curr == NULL) {
+        nHead = prev;
+        return;
+    }
+    LinkedListNode<int> *forward = curr->next;
+    solve(nHead, forward, curr);
+    curr->next = prev;
+}
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
+{
+    // Write your code here
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    
+    LinkedListNode<int> *nHead = head;
+    LinkedListNode<int> *curr = head;
+    LinkedListNode<int> *prev = NULL;
+    
+    solve(nHead, curr, prev);
+    
+    return nHead;
 }
