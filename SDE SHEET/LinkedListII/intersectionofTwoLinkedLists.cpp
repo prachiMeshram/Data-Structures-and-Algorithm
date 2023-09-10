@@ -27,6 +27,7 @@ public:
     }
 };
 
+// BRUTE FORCE
 Node *findIntersection(Node *firstHead, Node *secondHead)
 {
     // Write your code here
@@ -47,3 +48,47 @@ Node *findIntersection(Node *firstHead, Node *secondHead)
     }
     return NULL;
 }
+
+// USING DIFFERENCE
+int getDiff(Node *head1, Node* head2) {
+    int n1 = 0, n2 = 0;
+    while (head1!=NULL || head2!=NULL) {
+        if (head1!=NULL) {
+            n1++;
+            head1 = head1->next;
+        }
+        if (head2!=NULL) {
+            n2++;
+            head2 = head2->next;
+        }
+    }
+    return n1-n2;
+}
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    Node* a = firstHead;
+    Node* b = secondHead;
+    
+    int diff = getDiff(a, b);
+    
+    if (diff < 0) {
+        while (diff != 0) {
+            b = b->next;
+            diff++;
+        }
+    }
+    else {
+        while (diff) {
+            a = a->next;
+            diff--;
+        }
+    }
+    
+    while (a != b) {
+        a = a->next;
+        b = b->next;
+    } 
+    return a;
+}
+
