@@ -92,3 +92,16 @@ Node* findIntersection(Node *firstHead, Node *secondHead)
     return a;
 }
 
+// OPTIMAL APPROACH
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    Node* a = firstHead;
+    Node* b = secondHead;
+    
+    while (a != b) {
+        a = a==NULL ? secondHead : a->next;
+        b = b==NULL ? firstHead : b->next;
+    }
+    return a;
+}
