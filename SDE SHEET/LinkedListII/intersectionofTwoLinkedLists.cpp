@@ -49,6 +49,30 @@ Node *findIntersection(Node *firstHead, Node *secondHead)
     return NULL;
 }
 
+// using hashing 
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    unordered_set<Node*> st;
+    Node* temp = firstHead;
+    
+    while (temp != NULL) {
+        st.insert(temp);
+        temp = temp->next;
+    }
+    
+    temp = secondHead;
+    while (temp != NULL) {
+        if (st.find(temp) != st.end()) {
+            return temp;
+        }
+        temp = temp->next;
+    }
+
+    return NULL;
+}
+
+
 // USING DIFFERENCE
 int getDiff(Node *head1, Node* head2) {
     int n1 = 0, n2 = 0;
@@ -105,3 +129,5 @@ Node* findIntersection(Node *firstHead, Node *secondHead)
     }
     return a;
 }
+
+
