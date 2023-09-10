@@ -1,0 +1,25 @@
+// https://www.codingninjas.com/studio/problems/1105578?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+#include <bits/stdc++.h>
+using namespace std;
+
+//  Definition of linked list:
+template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+
+void deleteNode(LinkedListNode<int> * node) {
+    // Write your code here.
+    node->data = node->next->data;
+    node->next = node->next->next;
+}
