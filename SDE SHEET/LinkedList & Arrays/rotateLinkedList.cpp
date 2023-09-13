@@ -13,7 +13,25 @@ using namespace std;
      Node(int x, Node *next) : data(x), next(next) {}
  };
 
+// BRUTE FORCE
+Node *rotate(Node *head, int k) {
+     // Write your code here.
+     if (head == NULL || head->next == NULL || k == 0) return head;
+     
+     for (int i = 0; i < k; i++) {
+          Node* temp = head;
+          while (temp->next->next != NULL){
+               temp = temp->next;
+          }
+          Node* end = temp->next;;
+          temp->next = NULL;
+          end->next = head;
+          head = end;
+     }
+     return  head;
+}
 
+// OPTIMAL APPROACH
 Node *rotate(Node *head, int k) {
      // Write your code here.
      
