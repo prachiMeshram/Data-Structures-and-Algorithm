@@ -3,6 +3,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// BRUTE FORCE USING SETS
+int removeDuplicates(vector<int> &arr, int n) {
+	// Write your code here.
+	set<int> st;
+	
+	for (auto it: arr) {
+		st.insert(it);
+	}
+	
+	int i = 0;
+	for (auto it: st) {
+		arr[i] = it;
+		i++;
+	}
+
+	return i;
+}
+
+// OPTIMAL APPROACH USING TWO POINTERS
+
 int removeDuplicates(vector<int> &arr, int n) {
 	// Write your code here.
 	int i = 0;
