@@ -3,6 +3,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// BRUTE FORCE SOL
+long long getTrappedWater(long long* arr, int n) {
+    // Write your code here.
+    
+    long long ans = 0;
+    
+    for (int i = 0; i < n; i++) {
+        long long lMaxi = 0, rMaxi = 0;
+        for (int j = i; j >= 0; j--) {
+            lMaxi = max(lMaxi, arr[j]);
+        }
+        for (int j = i; j < n; j++) {
+            rMaxi = max(rMaxi, arr[j]);
+        }
+        
+        ans += min(lMaxi, rMaxi) - arr[i];
+    }
+
+    return  ans;
+}
+
 // BETTER SOLUTION
 long long getTrappedWater(long long* arr, int n) {
     // Write your code here.
