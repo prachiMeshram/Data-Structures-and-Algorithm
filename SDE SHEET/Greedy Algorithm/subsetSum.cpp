@@ -21,3 +21,22 @@ vector<int> subsetSum(vector<int> &nums){
 	sort(ans.begin(), ans.end());
 	return ans;
 }
+
+// using power set
+vector<int> subsetSum(vector<int> &num){
+	// Write your code here.	
+	int n = num.size();
+	vector<int> ans;
+	
+	for (int i = 0; i < (pow(2, n)); i++) {
+		int sum = 0;
+		for (int j = 0; j < n; j++) {
+			if (i & (1<<j)) {
+				sum += num[j];
+			}
+		}
+		ans.push_back(sum);
+	}
+	sort(ans.begin(), ans.end());
+	return ans;
+}
