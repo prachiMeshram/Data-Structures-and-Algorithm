@@ -28,3 +28,35 @@ string kthPermutation(int n, int k) {
     }
     return ans;
 }
+
+// USING RECURSION
+
+void solve(int ind, vector<string> &res, string &s) {
+    if (ind == s.size()) {
+        res.push_back(s);
+        return;
+    }
+
+    for (int i = ind; i < s.size(); i++) {
+        swap(s[i], s[ind]);
+        solve (ind+1, res, s);
+        swap(s[i], s[ind]);
+    } 
+}
+string kthPermutation(int n, int k) {
+    // Write your code here.
+    vector<string> res;
+    string s;
+    
+    for (int i = 1; i <= n; i++) {
+        s.push_back(i+'0');
+    }
+    
+    solve(0, res, s);
+    
+    sort(res.begin(), res.end());
+    
+    auto it = res.begin() + (k-1);
+    return *it;
+}
+
