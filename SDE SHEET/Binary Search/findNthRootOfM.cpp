@@ -1,5 +1,8 @@
 // https://www.codingninjas.com/studio/problems/1062679?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
 
+#include <bits/stdc++.h> 
+using namespace std;
+
 
 // OPTIMISED APPROACH
 // return 1 if == m
