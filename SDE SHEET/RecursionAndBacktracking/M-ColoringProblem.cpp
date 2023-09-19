@@ -1,7 +1,6 @@
 // https://www.codingninjas.com/studio/problems/m-coloring-problem_981273?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
 
-#include <bits/stdc++.h> 
-using namespace std;
+
 
 bool isPossible(int node, vector<int> &color, vector<vector<int>> &mat, int col, int n) {
 
