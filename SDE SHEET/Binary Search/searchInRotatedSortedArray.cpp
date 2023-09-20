@@ -3,6 +3,9 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
+// brute force : linear search
+
+// optimal approach
 int search(int* arr, int n, int key) {
     // Write your code here.
     int s = 0;
