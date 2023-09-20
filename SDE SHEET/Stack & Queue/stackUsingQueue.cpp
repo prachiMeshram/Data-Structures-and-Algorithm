@@ -3,6 +3,64 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
+// USING SINGLE QUEUE
+class Stack {
+	// Define the data members.
+    queue<int> q;
+    
+
+   public:
+    Stack() {
+        // Implement the Constructor.
+    }
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+    int getSize() {
+        // Implement the getSize() function.
+        return q.size();
+    }
+
+    bool isEmpty() {
+        // Implement the isEmpty() function.
+        if (q.empty()) {
+            return true;
+        }
+        return false;
+    }
+
+    void push(int element) {
+        // Implement the push() function.
+        q.push(element);
+        int size = q.size();
+        for (int i = 0; i < size-1; i++) {
+            q.push(q.front());
+            q.pop();
+        }
+    }
+
+    int pop() {
+        // Implement the pop() function.
+        if (!q.empty()) {
+            int val = q.front();
+            q.pop();
+            return val; 
+        }
+
+        return -1;
+    }
+
+    int top() {
+        // Implement the top() function.
+        if (!q.empty()) {
+            return q.front();
+        }
+        return -1;
+    }
+};
+
+// USING TWO QUEUES
+
 class Stack {
 	// Define the data members.
     queue<int> q1, q2;
