@@ -24,12 +24,8 @@ int aggressiveCows(vector<int> &stalls, int k)
     sort(stalls.begin(), stalls.end());
     int ans = -1;
     
-    long long s = 0;
-    long long e = 0;
-    
-    for (int i = 0; i < n; i++) {
-        e += stalls[i];
-    }
+    long long s = 1;
+    long long e = stalls[n-1]-stalls[0];
 
     while (s <= e) {
         long long mid = s + (e-s)/2;
