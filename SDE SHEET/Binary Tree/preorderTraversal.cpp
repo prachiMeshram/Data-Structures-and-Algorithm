@@ -14,7 +14,31 @@ public:
     TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
 };
 
+// ITERATIVE APPROACH
+vector<int> getPreOrderTraversal(TreeNode *root)
+{
+    // Write your code here. 
+    
+    vector<int> ans;
+    if (root == NULL) return ans;
+    TreeNode* curr = root;
+    stack<TreeNode*> st;
+    st.push(curr);
 
+    while (!st.empty()) {
+        curr = st.top();
+        st.pop();
+        ans.push_back(curr->data);
+        if (curr->right!=NULL) {
+            st.push(curr->right);
+        }
+        if (curr->left!=NULL){
+            st.push(curr->left);
+        }
+    }
+
+    return ans;
+}
 
 // RECURSIVE APPRROACH
 void preOTrav(TreeNode* root, vector<int> &ans) {
