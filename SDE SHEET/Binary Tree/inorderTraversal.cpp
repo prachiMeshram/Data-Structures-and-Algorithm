@@ -40,3 +40,21 @@ vector<int> getInOrderTraversal(TreeNode *root)
 
     return ans;
 }
+
+// RECURSIVE APPROACH
+
+void iotraversal(TreeNode *root, vector<int> &ans) {
+    if (root == NULL ) {
+        return;
+    }
+    iotraversal( root->left, ans);
+    ans.push_back(root->data);
+    iotraversal( root->right, ans);
+}
+vector<int> getInOrderTraversal(TreeNode *root)
+{
+    // Write your code here.
+    vector<int> ans;
+    iotraversal(root, ans);
+    return ans;
+}
