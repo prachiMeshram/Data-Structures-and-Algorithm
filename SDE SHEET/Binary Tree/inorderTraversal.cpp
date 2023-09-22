@@ -15,6 +15,38 @@ public:
     TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
 };
 
+// MORRIS TRAVERSAL
+vector<int> getInOrderTraversal(TreeNode *root)
+{
+    // Write your code here.
+    vector<int> ans;
+    TreeNode* curr = root;
+    
+    while (curr != NULL) {
+        if (curr->left == NULL) {
+            ans.push_back(curr->data);
+            curr = curr->right;
+        }
+        else {
+            TreeNode* prev = curr->left;;
+            while (prev->right != NULL && prev->right != curr) {
+                prev = prev->right;
+            }
+            if (prev->right == NULL) {
+                prev->right = curr;
+                curr = curr->left;
+            }
+            else {
+                prev->right = NULL;
+                ans.push_back(curr->data);
+                curr = curr->right;
+            }
+        }
+    }
+
+    return ans;
+}
+
 // ITERATIVE TRAVERSAL
 
 vector<int> getInOrderTraversal(TreeNode *root)
