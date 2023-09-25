@@ -3,41 +3,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Following is the TreeNode class structure
 
+template <typename T>
+class TreeNode
+{
+public:
+    T data;
+    TreeNode<T> *left;
+    TreeNode<T> *right;
 
-    // Following is the TreeNode class structure
+    TreeNode(T data)
+    {
+        this->data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
 
-    template <typename T>
-    class TreeNode {
-       public:
-        T data;
-        TreeNode<T> *left;
-        TreeNode<T> *right;
-
-        TreeNode(T data) {
-            this->data = data;
-            left = NULL;
-            right = NULL;
-        }
-    };
-
-
-
-vector<int> levelOrder(TreeNode<int> * root){
+vector<int> levelOrder(TreeNode<int> *root)
+{
     // Write your code here.
     vector<int> ans;
-    if (root == NULL) return ans;
+    if (root == NULL)
+        return ans;
     queue<TreeNode<int> *> q;
     q.push(root);
 
-    while (!q.empty()) {
+    while (!q.empty())
+    {
         TreeNode<int> *node = q.front();
         q.pop();
         ans.push_back(node->data);
-        if (node->left) {
+        if (node->left)
+        {
             q.push(node->left);
         }
-        if (node->right) {
+        if (node->right)
+        {
             q.push(node->right);
         }
     }
