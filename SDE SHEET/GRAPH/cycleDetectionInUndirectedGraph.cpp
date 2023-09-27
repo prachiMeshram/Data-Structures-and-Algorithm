@@ -4,7 +4,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool detect(int src, vector<int> adj[], int vis[]) {
+// USING BFS
+bool detectBFS(int src, vector<int> adj[], int vis[]) {
     vis[src] = 1;
 
     queue<pair<int, int>> q;
@@ -40,10 +41,49 @@ string cycleDetection (vector<vector<int>>& edges, int n, int m)
 
     for (int i = 1; i <= n; i++) {
         if (!vis[i]) {
-            if (detect(i, adj, vis)) {
+            if (detectBFS(i, adj, vis)) {
                 return "Yes";
             }
         }
     }
     return "No";
 }
+
+#include <bits/stdc++.h>
+// USING DFS
+
+bool detectDFS(int node, int parent, vector<int> adj[], int vis[]) {
+    vis[node] = 1;
+
+    for (auto it: adj[node] ) {
+        if (!vis[it]) {
+            if (detectDFS(it, node, adj, vis)) return true;
+        }
+        else if (it != parent) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+    vector<int> adj[n+1];
+
+    for (auto it: edges) {
+        adj[it[0]].push_back(it[1]);
+        adj[it[1]].push_back(it[0]);
+    }
+    int vis[n+1] = {0};
+
+    for (int i = 1; i <= n; i++) {
+        if (!vis[i]) {
+            if (detectDFS(i, -1, adj, vis)) {
+                return "Yes";
+            }
+        }
+    }
+    return "No";
+}
+
