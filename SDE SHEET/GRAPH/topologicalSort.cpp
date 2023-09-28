@@ -4,36 +4,40 @@
 using namespace std;
 
 // DFS
-bool dfsCheck(int node, int vis[], int pathVis[], vector<int> adj[]) {
-  vis[node] = 1;
-  pathVis[node] = 1;
-  
-  for (auto it: adj[node]) {
-    if (!vis[it]) {
-      if (dfsCheck(it, vis, pathVis, adj)) return true;
+void dfs(int node, int vis[], stack<int> &st, vector<int> adj[]) {
+    vis[node] = 1;
+    for (auto it: adj[node]) {
+        if (!vis[it]) {
+            dfs(it, vis, st, adj);
+        }
     }
-    else if (pathVis[it]) {
-      return true;;
-    }
-  }
-
-  pathVis[node] = 0;
-  return false;
+    st.push(node);
 }
-int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
-  // Write your code here.
-  vector<int> adj[n+1];
-  for (auto it: edges) {
-    adj[it.first].push_back(it.second);
-  }
-  int vis[n+1] = {0};
-  int pathVis[n+1] = {0};
-  for (int i = 1; i <= n; i++) {
-    if (!vis[i]) {
-      if (dfsCheck(i, vis, pathVis, adj))return true;
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e) {
+  // Write your code here
+    vector<int> topo;
+
+    vector<int> adj[v];
+
+    for (auto it : edges) {
+        int src = it[0];
+        int des = it[1];
+
+        adj[src].push_back(des);
     }
-  }
-  return false;
+    int vis[v] = {0};
+    stack<int> st;
+
+    for (int i = 0; i < v; i++) {
+        if (!vis[i]) {
+            dfs(i, vis, st, adj);
+        }
+    }
+    while (!st.empty()) {
+        topo.push_back(st.top());
+        st.pop();
+    }
+    return topo;
 }
 
 // BFS
