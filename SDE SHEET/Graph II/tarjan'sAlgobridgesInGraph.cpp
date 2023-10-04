@@ -1,5 +1,7 @@
 // https://www.codingninjas.com/studio/problems/bridges-in-a-graph_893026?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
 
+// Bridges in Graph – Using Tarjan’s Algorithm of time in and low time
+
 #include <bits/stdc++.h>
 using namespace std;
 
