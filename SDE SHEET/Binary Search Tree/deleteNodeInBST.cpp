@@ -46,7 +46,7 @@ BinaryTreeNode<int> *deleteNode(BinaryTreeNode<int> *root, int key)
     if (root == NULL)
         return NULL;
     if (root->data == key)
-        return helper(root->left);
+        return helper(root);
 
     BinaryTreeNode<int> *dummy = root;
 
@@ -54,9 +54,10 @@ BinaryTreeNode<int> *deleteNode(BinaryTreeNode<int> *root, int key)
     {
         if (key < root->data)
         {
-            if (root->left != NULL && root->data == key)
+            if (root->left != NULL && root->left->data == key)
             {
                 root->left = helper(root->left);
+                break;
             }
             else
             {
@@ -65,9 +66,10 @@ BinaryTreeNode<int> *deleteNode(BinaryTreeNode<int> *root, int key)
         }
         else
         {
-            if (root->right != NULL && root->data == key)
+            if (root->right != NULL && root->right->data == key)
             {
                 root->right = helper(root->right);
+                break;
             }
             else
             {
@@ -77,3 +79,5 @@ BinaryTreeNode<int> *deleteNode(BinaryTreeNode<int> *root, int key)
     }
     return dummy;
 }
+
+
